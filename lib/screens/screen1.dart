@@ -27,6 +27,8 @@ class _Screen1State extends State<Screen1> {
   int? apiHumidity = 0;
   String? apiWeather = 'N/A';
   Color? aqiColor = Colors.white;
+  int? apiId;
+  String? imageName;
 
   @override
   void initState() {
@@ -45,6 +47,8 @@ class _Screen1State extends State<Screen1> {
     int aqiLevel = widget.apiAqiData['list'][0]['main']['aqi'];
     apiAqi = weather.getAqi(aqiLevel);
     aqiColor = weather.getAqiColor(aqiLevel);
+    apiId = widget.apiWeatherData['weather'][0]['id'];
+    imageName = weather.getImage(apiId!);
   }
 
   @override
@@ -71,7 +75,7 @@ class _Screen1State extends State<Screen1> {
                       Text(apiCity!.toString(),
                           style: GoogleFonts.poppins(color: Colors.white)),
                       SizedBox(height: 10.0),
-                      Image.asset('images/Framedrizle.png'),
+                      Image.asset('images/$imageName'),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -137,8 +141,8 @@ class _Screen1State extends State<Screen1> {
                     FontAwesomeIcons.syncAlt,
                     size: 14.0,
                   ),
-                  gradientColor2: Colors.greenAccent,
-                  gradientColor1: Colors.blueAccent,
+                  gradientColor2: Colors.teal,
+                  gradientColor1: Colors.lightBlue,
                   topLeft: 20.0,
                   topRight: 20.0,
                 ),
@@ -150,8 +154,8 @@ class _Screen1State extends State<Screen1> {
                   },
                   buttonText: Text('SEARCH BY CITY', style: kButtonTextStyle),
                   buttonIcon: Icon(FontAwesomeIcons.search, size: 14.0),
-                  gradientColor1: Colors.greenAccent,
-                  gradientColor2: Colors.blueAccent,
+                  gradientColor1: Colors.teal,
+                  gradientColor2: Colors.lightBlue,
                   bottomLeft: 20.0,
                   bottomRight: 20.0,
                 )
